@@ -1,0 +1,135 @@
+html, body {
+	margin:0;
+	padding:0;
+	font-size:16px;
+}
+#app {
+	margin:3em auto 0 auto;
+	width:80%;
+	padding:1em;
+}
+.c-box-shadow {
+	box-shadow:1px 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 1px 0 rgba(80,80,80,0.2);
+}
+.c-top-bar {
+	top:0;
+	position:fixed;
+	z-index:10;
+	background-color:rgba(150,150,150, 0.75);
+	width:100%;
+	padding:0.5em 0;
+}
+.c-top-bar:after {
+	content:' ';
+	display:block;
+	clear:both;
+	height:0;
+}
+.c-top-bar h1 {
+	display:inline-block;
+	float:left;
+	margin:0 0 0 1rem;
+	font-size:1.2rem;
+}
+.c-top-bar a {
+	text-decoration:none;
+	cursor:pointer;
+	display:inline-block;
+	float:right;
+	margin: 0 0.5em;
+}
+.c-original-question {
+	background-image:url(q.jpg);
+	background-position:.5em .5em;
+	min-height:2.2em;
+	background-repeat:no-repeat;
+	padding:20px .5em .5em 70px;
+	box-shadow:1px 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 1px 0 rgba(80,80,80,0.2);
+	border-radius:0.5em;
+	margin-bottom:0.5em;
+}
+.c-original-question .anwser {
+}
+.c-anwser {
+	text-decoration:underline;
+	color:#3465c3;
+}
+.c-anwser .fa-check {
+	color:#c33465;
+	font-size:2em;
+	display:inline-block;
+	vertical-align:top;
+	margin: 0 0 0 1em;
+}
+.c-question-comment {
+	color:#3465c3;
+	margin-top:.5em;
+}
+.c-btn-container {
+	text-align:right;
+	padding:0.5em;
+}
+
+.c-step {
+	padding:1em;
+	box-shadow:1px 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 1px 0 rgba(80,80,80,0.2);
+	border-radius:0.5em;
+	margin:.5em 0;
+}
+.c-step>h3 , .c-step>h4 {
+	margin:0 0 0.5rem 0;
+}
+
+.c-inline-row {
+	margin:0.5em 0;
+}
+.c-inline-row .c-big {
+	font-size:1.5em;
+}
+.c-inline-row .c-exbig {
+	font-size:2em;
+}
+.c-inline-row i, .c-inline-row span, .c-inline-row b, .c-inline-row img {
+	display:inline-block;
+	margin-right:.5em;
+	vertical-align:middle;
+}
+.c-box {
+	display:inline-block;
+	vertical-align:text-top;
+}
+.c-box h4 {
+	text-align:center;
+	font-size:1rem;
+}
+.c-box:after {
+	content:' ';
+	display:block;
+	height:0;
+	clear:both;
+}
+
+.c-error-msg {
+	padding:0.5em;
+	background-color:#f7d6d6;
+	color:#b00f0f;
+	border-radius:.5em;
+	margin:0.5em 0;
+}
+.c-error-msg .fa-times-circle {
+	font-size: 2em;
+	color: red;
+}
+
+.c-fade-enter-active, .c-fade-leave-active {
+  transition: opacity .5s;
+}
+.c-fade-enter, .c-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+@media screen and (max-width:699px) {
+	#app {
+		width:100%;
+	}
+}

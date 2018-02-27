@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>桶装油和瓶装油</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			.align-middle {
+			}
+			.align-middle * {
+				vertical-align:middle;
+			}
+			.align-middle span {
+				font-size:1.5rem;
+				display:inline-block;
+			}
+			.align-middle i {
+				font-size:2rem;
+				display:inline-block;
+				margin:0 1em;
+				color:#3465c3;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				一桶油5升，每桶60元。一瓶油500ml，每瓶7元。哪种包装便宜，每升便宜多少元？
+				<span class="c-anwser" v-show="currentStep>4">
+					桶装油便宜，每升便宜2元
+					<i class="fas fa-check"></i>
+				</span>
+				<div class="c-question-comment">
+					本题做对了，但是步骤太繁琐，绕了很大弯路。
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep > 2">
+					<div class="align-middle">
+						<img height="100" style="margin:0 35px" src="oil500mL.png"> <span>500 毫升 = 7 元</span>
+						<i class="fas fa-hand-point-right"></i>
+						<transition name="c-fade">
+							<span v-show="currentStep > 3">
+								<span>1 升 = 1000ml / 500ml = 2瓶<br> = 7 &times; 2 = <b>14 元</b></span>
+							</span>
+						</transition>
+					</div>
+				</div>
+			</transition>
+			<div class="c-step">
+				<div class="align-middle">
+					<img height="150" src="oil5L.png"> <span>5 升 = 60 元</span>
+					<i class="fas fa-hand-point-right"></i>
+					<transition name="c-fade">
+						<span class="align-middle" v-show="currentStep > 1">
+							<span>1 升 = 60 &divide; 5 = <b>12 元</b></span>
+						</span>
+					</transition>
+				</div>
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 5
+				},
+				computed : {
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+					},
+					onStep3 (isNext) {
+					},
+					onStep4 (isNext) {
+					},
+					onStep5 (isNext) {
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,225 @@
+<html>
+	<head>
+		<title>快速摩托车</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			#three-keys {
+				width:10rem;
+				height:10rem;
+				border-radius:50%;
+				background-color:#0542a7;
+				margin:2rem;
+			}
+			#three-keys:after {
+				position:absolute;
+				content:' ';
+				display:block;
+				width:7rem;
+				height:7rem;
+				border-radius:50%;
+				background-color:white;
+				transform:translate(1.5rem, 1.5rem);
+				z-index:1;
+			}
+			#three-keys>div {
+				z-index:2;
+				position:absolute;
+				line-height:5rem;
+				width:5rem;
+				height:5rem;
+				border-radius:50%;
+				color:white;
+				text-align:center;
+				font-size:1.5rem;
+			}
+			#key-distance {
+				background-color:#de5a4d;
+				transform:translate(2.6rem, -1.4rem)
+			}
+			#key-speed {
+				background-color:#24c55d;
+				transform:translate(6.7rem, 5.2rem)
+			}
+			#key-time {
+				background-color:#de4dd3;
+				transform:translate(-1.2rem, 5.2rem)
+			}
+			#road {
+				height:4px;
+				background-color:black;
+			}
+			#road>div {
+				float:left;
+				margin-top:1.5em;
+				border-top-style:solid;
+				border-top-width:1px;
+				height:1px;
+				text-align:center;
+			}
+			#road>div>span {
+				display:inline-block;
+				color:white;
+				transform:translate(0, -0.7em);
+				padding:0 0.5em;
+			}
+			#road-1 {
+				width:85%;
+				color:#de5a4d;
+			}
+			#road-1 span {
+				background-color:#de5a4d;
+			}
+			#road-2 {
+				width:15%;
+				color:#24c55d;
+			}
+			#road-2 span {
+				background-color:#24c55d;
+			}
+			#road-all {
+				width:100%;
+				color:#de4dd3;
+			}
+			#road-all span {
+				background-color:#de4dd3;
+			}
+			#car i {
+				font-size:1.5em;
+				color:#de5a4d;
+			}
+			#motobike i {
+				font-size:1.5em;
+				color:#de4dd3;
+			}
+			#car, #motobike {
+				width:0;
+				text-align:right;
+				animation-duration: 1.7s;
+				animation-delay: .5s;
+				animation-fill-mode: forwards;
+				animation-timing-function: linear;
+			}
+			#car.running {
+				animation-name: kf_car; 
+			}
+			#motobike.running {
+				animation-name: kf_motor; 
+			}
+			#car.running i, #motobike.running i {
+				transform:translate(0, 0);
+			}
+			@keyframes kf_car {
+				from {
+					width:0;
+				}
+				to {
+					width:85%;
+				}
+			}
+			@keyframes kf_motor {
+				from {
+					width:0;
+				}
+				to {
+					width:100%;
+				}
+			}
+
+			.task {
+				padding:.5em;
+				border:2px solid #0542a7;
+				border-radius:.5em;
+				margin-bottom:1em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				<div class="c-inline-row">
+					一辆小汽车和一辆摩托车同时从甲镇开往相距360千米外的乙镇。当摩托车到达乙镇时，小汽车距离乙镇还有40千米。
+					已知小汽车时速64千米。那么摩托车时速比小汽车快多少？
+					<span class="c-anwser" v-show="currentStep==maxSteps">
+						8千米/小时
+						<i class="fas fa-check"></i>
+					</span>
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>3">
+					<div class="c-inline-row">
+						<span class="task">求摩托车比汽车快多少， 已知汽车速度</span>
+						<span class="connector">需要<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">求摩托车速度，已知距离</span>
+						<span class="connector">需要<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">求摩托车行驶时间</span>
+						<span class="connector">等于<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">汽车行驶时间。已知汽车速度</span>
+						<span class="connector">需要汽车行驶距离<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">汽车行驶距离 = 360 - 40</span>
+					</div>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>1">
+					<h3>那么本题中两辆车相等的元素是什么？</h3>
+					<transition name="c-fade">
+					<h3 v-show="currentStep>2">是：时间。两辆车同时出发，行驶的时间相同，距离、速度不同。</h3>
+					</transition>
+					<div style="margin-bottom:2em">
+						<div id="motobike" :class="{running:running}"><i class="fas fa-motorcycle"></i></div>
+						<div id="car" :class="{running:running}"><i class="fas fa-car"></i></div>
+						<div id="road"><div id="road-1"><span>320km</span></div><div id="road-2"><span>40km</span></div><div id="road-all"><span>360km</span></div></div>
+						<div style="clear:both"></div>
+					</div>
+				</div>
+			</transition>
+			<div class="c-step">
+				<h3>关于速度的题目三个要素，已知任何两个可以推导第三个。</h3>
+				<div id="three-keys">
+					<div id="key-distance">距离</div>
+					<div id="key-time">时间</div>
+					<div id="key-speed">速度</div>
+				</div>
+				<h3>对于两个物体速度的问题，关键在于找到它们相等的那个元素。</h3>
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: { 
+					addingScore : false,
+					stepFreezeTime : {
+						step2: {next:2200}
+					},
+					running : false,
+					maxSteps : 4
+				},
+				computed : {
+				},
+				methods : {
+					onStep2 (isNext) {
+						if (isNext)
+							this.running = true;
+					},
+					onStep1 (isNext) {
+						if (!isNext)
+							this.running = false;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

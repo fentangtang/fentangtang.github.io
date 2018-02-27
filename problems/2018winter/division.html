@@ -1,0 +1,207 @@
+<html>
+	<head>
+		<title>关于除法</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			.dividend{
+				width:30%;
+				text-align:center;
+			}
+			.divisor {
+				width:20%;
+			}
+			.symbol {
+				width:10%;
+				min-width:80px;
+			}
+			.result {
+				width:28%;
+				text-align:center;
+			}
+			.candy {
+				background-image:url(candy.png);
+				width:30px;
+				height:30px;
+				display:inline-block;
+			}
+			.fa-child {
+				color:#88f290;
+				font-size:2em;
+				margin:0 1px;
+				display:inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				两数相除，被除数缩小到原来一半，要使商不变，则除数：<span class="c-anwser" v-show="currentStep>5">原来一半
+				<i class="fas fa-check"></i></span>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep > 5">
+					<h3>
+						所以，除数和被除数同时乘以除以同样的数字，商不变。本题的答案是：
+						<span class="c-anwser">也要缩小到原来一半（除以2） </span>
+					</h3>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep > 3">
+					<h3>
+						<span v-show="currentStep>4">若要保持结果不变，还是4颗，人数也要减少到四分之一(除以4)</span>
+						<span v-show="currentStep==4">若糖果总数只有第二步的四分之一(除以4)，人数不变，每人只能分到之前四分之一的糖果</span>
+					</h3>
+					<div class="c-box dividend">
+						<h4>共有 {{candyNumber3}} 颗糖果</h4>
+						<div v-for="c in visibleCandies3" class="candy" 
+							:style="{'margin-left':c.margin, 'margin-top':c.margin, transform:'rotate('+c.deg+'deg)'}"></div>
+					</div><div class="symbol c-box">
+						<h4>平均分给</h4>
+						<h4 class="">&divide;</h4>
+					</div><div class="c-box divisor">
+						<h4>{{childNumber3}} 个小朋友</h4>
+						<h4>
+						<i class="fas fa-child" v-for="c in childNumber3"></i>
+						</h4>
+					</div><div class="symbol c-box">
+						<h4>&nbsp;</h4>
+						<h4 class="">=</h4>
+					</div><div class="c-box result">
+						<h4>每人 {{candyNumber3/childNumber3}} 颗</h4>
+						<div v-for="c in resultCandies3" class="candy" 
+							:style="{'margin-left':c.margin, 'margin-top':c.margin, transform:'rotate('+c.deg+'deg)'}"></div>
+					</div>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep > 1">
+					<h3>
+						<span v-show="currentStep>2">若要保持结果不变，还是4颗，糖果总数也要加倍</span>
+						<span v-show="currentStep==2">人数加倍，每人只能分到原本一半的糖果</span>
+					</h3>
+					<div class="c-box dividend">
+						<h4>共有 {{candyNumber2}} 颗糖果</h4>
+						<div v-for="c in visibleCandies2" class="candy" 
+							:style="{'margin-left':c.margin, 'margin-top':c.margin, transform:'rotate('+c.deg+'deg)'}"></div>
+					</div><div class="symbol c-box">
+						<h4>平均分给</h4>
+						<h4 class="">&divide;</h4>
+					</div><div class="c-box divisor">
+						<h4>{{childNumber2}} 个小朋友</h4>
+						<h4>
+						<i class="fas fa-child" v-for="c in childNumber2"></i>
+						</h4>
+					</div><div class="symbol c-box">
+						<h4>&nbsp;</h4>
+						<h4 class="">=</h4>
+					</div><div class="c-box result">
+						<h4>每人 {{candyNumber2/childNumber2}} 颗</h4>
+						<div v-for="c in resultCandies2" class="candy" 
+							:style="{'margin-left':c.margin, 'margin-top':c.margin, transform:'rotate('+c.deg+'deg)'}"></div>
+					</div>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step">
+					<h3>一个例子</h3>
+					<div class="c-box dividend">
+						<h4>共有 {{candyNumber}} 颗糖果</h4>
+						<div v-for="c in visibleCandies" class="candy" 
+							:style="{'margin-left':c.margin, 'margin-top':c.margin, transform:'rotate('+c.deg+'deg)'}"></div>
+					</div><div class="symbol c-box">
+						<h4>平均分给</h4>
+						<h4 class="">&divide;</h4>
+					</div><div class="c-box divisor">
+						<h4>{{childNumber}} 个小朋友</h4>
+						<h4>
+						<i class="fas fa-child" v-for="c in childNumber"></i>
+						</h4>
+					</div><div class="symbol c-box">
+						<h4>&nbsp;</h4>
+						<h4 class="">=</h4>
+					</div><div class="c-box result">
+						<h4>每人 {{candyNumber/childNumber}} 颗</h4>
+						<div v-for="c in resultCandies" class="candy" 
+							:style="{'margin-left':c.margin, 'margin-top':c.margin, transform:'rotate('+c.deg+'deg)'}"></div>
+					</div>
+				</div>
+			</transition>
+		</div>
+		<script> 
+			var ALL_CANDIES = [];
+			for (var i=0; i < 54; i++)
+				ALL_CANDIES.push({margin:Math.round(Math.random()*4)*2, deg:(Math.round(Math.random()*10)-5)*3});
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					candyNumber : 24,
+					childNumber : 6,
+
+					candyNumber2 : 24,
+					childNumber2 : 12,
+
+					candyNumber3 : 12,
+					childNumber3 : 12,
+
+					candies : ALL_CANDIES,
+					maxSteps : 6
+				},
+				computed : {
+					visibleCandies () {
+						return this.candies.slice(0, this.candyNumber);
+					},
+					resultCandies () {
+						return this.candies.slice(0, this.candyNumber/this.childNumber);
+					},
+					visibleCandies2 () {
+						return this.candies.slice(0, this.candyNumber2);
+					},
+					resultCandies2 () {
+						return this.candies.slice(0, this.candyNumber2/this.childNumber2);
+					},
+					visibleCandies3 () {
+						return this.candies.slice(0, this.candyNumber3);
+					},
+					resultCandies3 () {
+						return this.candies.slice(0, this.candyNumber3/this.childNumber3);
+					}
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+						if (!isNext)
+							this.candyNumber2 /= 2;
+					},
+					onStep3 (isNext) {
+						if (isNext)
+							this.candyNumber2 *= 2;
+					},
+					onStep4 (isNext) {
+						if (isNext)
+							;
+						else
+							this.childNumber3 *= 4;
+					},
+					onStep5 (isNext) {
+						if (isNext)
+							this.childNumber3 /= 4;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

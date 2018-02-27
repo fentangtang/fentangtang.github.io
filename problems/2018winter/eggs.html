@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<title>好多鸡蛋</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			.egg-img {
+				width:75px;
+				height:100px;
+				background-image:url(egg.png);
+				background-size:contain;
+				background-repeat:no-repeat;
+				line-height:100px;
+				font-size:30px;
+				text-align:center;
+				display:inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				一箱鸡蛋的个数在46 ~ 70之间。2个2个数、3个3个数、5个5个数都正好数完。这箱鸡蛋可能是多少个？
+				<span class="c-anwser" v-show="currentStep>3">
+					60 个
+					<i class="fas fa-check"></i>
+				</span>
+				<div class="c-question-comment">
+					注意要满足三个条件，同时能被3个数字整除。
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>2">
+					<h4><i class="fas fa-check" style="font-size:2em;color:green"></i> 正确的做法：</h4>
+					<div>
+						一个数字可以被2、3、5整除，表示这个数字分解质因数之后，可以写作如下形式：
+
+						<div class="c-inline-row">
+							<div class="egg-img">{{currentStep==maxSteps?60:'?'}}</div> = 2 &times; 3 &times 5 &times; ...
+							<transition name="c-fade">
+								<span v-show="currentStep>3"> = 2 &times; 5 &times; 3 &times; ...
+									= 10 &times; 3 &times; ... 可以被10整除！
+								</span>
+							</transition>
+							<transition name="c-fade">
+								<span v-show="currentStep>4"> 
+									46 ~ 70 的数字之中，只有50、60、70能被10整除，其中能被3整除的<b>只有60</b>。
+								</span>
+							</transition>
+						</div>
+					</div>
+				</div>
+			</transition>
+			<div class="c-step">
+				<i class="fas fa-times-circle" style="font-size:2em;color:red"></i> 错误的做法：分别列出能被整除的三组数字。因为：
+				<transition name="c-fade">
+					<div v-show="currentStep>1">
+						<p><b>被2整除：</b> 46、48、50、52、54、56、58、60、62、64、66、68、70</p>
+						<p><b>被3整除：</b> 48、51、54、57、60、63、66、69</p>
+						<p><b>被5整除：</b> 50、60、70</p>
+						可以看出数字很多，那么如果不是46~70而是700呢，这种做法就完全不可行了。
+					</div>
+				</transition>
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 5
+				},
+				computed : {
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

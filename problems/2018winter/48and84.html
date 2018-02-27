@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<title>48错写成84</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			.egg-img {
+				width:75px;
+				height:100px;
+				background-image:url(egg.png);
+				background-size:contain;
+				background-repeat:no-repeat;
+				line-height:100px;
+				font-size:30px;
+				text-align:center;
+				display:inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				做除法时，把除数48错写成84，结果得到的商是4，余数是48。正确的商应该是
+				<span class="c-anwser" v-show="currentStep==maxSteps">
+					8
+					<i class="fas fa-check"></i>
+				</span>
+				<div class="c-question-comment">
+					并不难，细心
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>2">
+					<div class="c-inline-row">
+						<span class="c-big">348 &divide; 48 =</span>
+						<span class="c-exbig">8</span>
+					</div>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>1">
+					<div class="c-inline-row">
+						<span class="c-exbig">?</span>
+						<br>
+						<span class="c-big">=</span><span class="c-big" style="color:red">84</span> <span class="c-big">&times; 4 + 48</span>
+						<br>
+						<span class="c-big">= 348</span>
+					</div>
+				</div>
+			</transition>
+			<div class="c-step">
+				<div class="c-inline-row">
+					<span class="c-exbig">?</span><span class="c-big">&divide;</span>
+					<span class="c-big" style="color:red">84</span> <span class="c-big"> = 4 ...... 48</span>
+				</div>
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 3
+				},
+				computed : {
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

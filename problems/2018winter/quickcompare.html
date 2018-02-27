@@ -1,0 +1,446 @@
+<html>
+	<head>
+		<title>快速比大小</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			.circle {
+				border:1px solid black;
+				width:2em;
+				height:2em;
+				border-radius:50%;
+				text-align:center;
+				line-height:2em;
+			}
+			.circle span {
+				margin-right:0 !important;
+			}
+			.circle-number {
+				border:1px dotted blue;
+				border-radius:50%;
+				width:2em;
+				height:2em;
+				text-align:center;
+				line-height:2em;
+			}
+			.dividing4>span {
+				animation-duration: .7s;
+				animation-delay: .5s;
+				animation-fill-mode: forwards;
+			}
+			.dividing4>#divid4_1 {
+				animation-name: kf_d4_1; 
+			}
+			.dividing4>#divid4_2 {
+				animation-name: kf_d4_2; 
+			}
+			.dividing4>#divid4_3 {
+				animation-name: kf_d4_3; 
+			}
+			.dividing4>#divid4_4 {
+				animation-name: kf_d4_4; 
+			}
+			@keyframes kf_d4_1 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(-15px, -15px);
+				}
+				100% {
+					transform:translate(76px, 0px);
+				}
+			}
+			@keyframes kf_d4_2 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(15px, -15px);
+				}
+				99% {
+					transform:translate(-72px, 76px);
+				}
+				100% {
+					opacity:0.4;
+					transform:translate(-72px, 76px);
+				}
+			}
+			@keyframes kf_d4_3 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(-15px, 15px);
+				}
+				99% {
+					transform:translate(76px, 4px);
+				}
+				100% {
+					transform:translate(76px, 4px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d4_4 {
+				0% {
+					transform:translate(0, 0);
+				}
+				20% {
+					transform:translate(15px, 15px);
+				}
+				99% {
+					transform:translate(80px, 4px);
+				}
+				100% {
+					transform:translate(80px, 4px);
+					opacity:0.4;
+				}
+			} 
+
+			.dividend-dividing9 {
+				animation-duration: .7s;
+				animation-delay: .5s;
+				animation-fill-mode: forwards;
+				animation-name: kf_d9_dividend; 
+			}
+			@keyframes kf_d9_dividend {
+				from {
+					opacity:1;
+					transform:translate(280px, 100px);
+				}
+				to {
+					opacity:1;
+					transform:translate(0, 0);
+				}
+			}
+
+			.divid9-formular {
+				opacity:0;
+				animation-duration: .5s;
+				animation-delay: 1.2s;
+				animation-fill-mode: forwards;
+			}
+			.divid9-formular-show {
+				animation-name: kf_d9_formular; 
+			}
+			@keyframes kf_d9_formular {
+				from {
+					opacity:0;
+				}
+				to {
+					opacity:1;
+				}
+			}
+
+			.dividing9-container>span {
+				animation-duration: .5s;
+				animation-delay: 1.8s;
+				animation-fill-mode: forwards;
+			}
+			.dividing9-container>#divid9_1 {
+				animation-name: kf_d9_1; 
+			}
+			.dividing9-container>#divid9_2 {
+				animation-name: kf_d9_2; 
+			}
+			.dividing9-container>#divid9_3 {
+				animation-name: kf_d9_3; 
+			}
+			.dividing9-container>#divid9_4 {
+				animation-name: kf_d9_4; 
+			}
+			.dividing9-container>#divid9_5 {
+				animation-name: kf_d9_5; 
+			}
+			.dividing9-container>#divid9_6 {
+				animation-name: kf_d9_6; 
+			}
+			.dividing9-container>#divid9_7 {
+				animation-name: kf_d9_7; 
+			}
+			.dividing9-container>#divid9_8 {
+				animation-name: kf_d9_8; 
+			}
+			.dividing9-container>#divid9_9 {
+				animation-name: kf_d9_9; 
+			}
+
+			@keyframes kf_d9_1 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(-5px, -5px);
+				}
+				100% {
+					transform:translate(39px, 0);
+				}
+			}
+			@keyframes kf_d9_2 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(0, -5px);
+				}
+				99% {
+					transform:translate(-24px, 26px);
+				}
+				100% {
+					transform:translate(-24px, 26px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_3 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(5px, -5px);
+				}
+				99% {
+					transform:translate(-22px, 26px);
+				}
+				100% {
+					transform:translate(-22px, 26px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_4 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(-5px, 0);
+				}
+				99% {
+					transform:translate(52px, 2px);
+				}
+				100% {
+					transform:translate(52px, 2px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_5 {
+				30% {
+					transform:translate(0, 0);
+				}
+				99% {
+					transform:translate(54px, 2px);
+				}
+				100% {
+					transform:translate(54px, 2px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_6 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(5px, 0);
+				}
+				99% {
+					transform:translate(-48px, 28px);
+				}
+				100% {
+					transform:translate(-48px, 28px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_7 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(-5px, 5px);
+				}
+				99% {
+					transform:translate(26px, 4px);
+				}
+				100% {
+					transform:translate(26px, 4px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_8 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(0, 5px);
+				}
+				99% {
+					transform:translate(28px, 4px);
+				}
+				100% {
+					transform:translate(28px, 4px);
+					opacity:0.4;
+				}
+			}
+			@keyframes kf_d9_9 {
+				0% {
+					transform:translate(0, 0);
+				}
+				30% {
+					transform:translate(5px, 5px);
+				}
+				99% {
+					transform:translate(30px, 4px);
+				}
+				100% {
+					transform:translate(30px, 4px);
+					opacity:0.4;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				<div class="c-inline-row">
+					360 &divide; 45 <span class="circle"><span v-show="currentStep==maxSteps">&lt;</span></span>360 &divide; 4 &divide; 9
+					<span class="c-anwser" v-show="currentStep==maxSteps">
+						<i class="fas fa-check"></i>
+					</span>
+				</div>
+				<div class="c-question-comment">
+					注意观察，细心计算。这道题本身没有难度，细心计算就可以做对。而且有可以一眼看出来正确结果的便利的解法。
+					但是两者都没有做到就做错了，若是关键大考会很可惜。
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>5">
+					<h3>回到本题，原题目可通过口算简单的4&times;9=36化简成</h3>
+					<div class="c-inline-row">
+						<span class="c-big">360 &divide; 45</span>
+						<span class="circle"></span>
+						<span class="c-big">360 &divide; 36</span>
+					</div>
+					<h3>就可以可直接判断答案了。</h3>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>2">
+					<h3>那么一个数先 &divide; 4 又 &divide; 9，整体来说除数是多少？</h3>
+					<transition name="c-fade">
+						<div class="c-inline-row" v-show="currentStep>4" style="margin-top:2em;">
+							所以：
+							<span class="circle"></span><span class="c-big"> &divide; 4 &divide; 9</span>
+							<span class="c-big">=</span>
+							<span class="circle"></span><span class="c-big"> &divide; ( 4 &times; 9 )</span>
+
+						</div>
+					</transition>
+					<transition name="c-fade">
+						<div class="c-inline-row" v-show="currentStep>3" style="margin-top:2em;">
+							<span :class="{'dividend-dividing9':dividing9}" style="
+								width:72px;
+								height:72px;
+								background-color:#53e863;
+								opacity:0;
+								">
+							</span>
+							<span class="c-big divid9-formular" :class="{'divid9-formular-show':dividing9}">&divide; 9 = </span>
+							<span style="width:72px;height:72px;" class="divid9-formular"
+								:class="{'divid9-formular-show':dividing9,'dividing9-container':dividing9}">
+								<span v-for="n in 9" :key="'divid9_'+n" :id="'divid9_'+n" style="
+									margin-right:0;
+									width:24px;
+									height:24px;
+									background-color:#53e863;
+									">
+								</span>
+							</span>
+						</div>
+					</transition>
+					<div class="c-inline-row" style="margin-top:2em;">
+						<span style="
+							width:144px;
+							height:144px;
+							background-color:#53e863;
+							">
+						</span>
+						<span class="c-big">&divide; 4 = </span>
+						<span style="width:144px;height:144px;" :class="{'dividing4':dividing4}">
+							<span v-for="n in 4" :key="'divid4_'+n" :id="'divid4_'+n" style="
+								margin-right:0;
+								width:72px;
+								height:72px;
+								background-color:#53e863;
+								">
+							</span>
+						</span>
+					</div>
+				</div>
+			</transition>
+			<div class="c-step">
+				<h3>仔细阅读观察题目永远是第一步</h3>
+				<transition name="c-fade">
+					<div v-show="currentStep>1" style="
+							margin-top:2em;
+							margin-left:16px;
+							width:128px;
+							height:30px;
+							border-top:1px solid blue;
+							border-radius:30px 30px 0 0;
+							text-align:center;
+						">相等</div>
+				</transition>
+				<div class="c-inline-row" style="min-width:260px">
+					<span :class="{'circle-number':currentStep>1}">360</span> &divide; 45 <span class="circle"></span><span :class="{'circle-number':currentStep>1}">360</span> &divide; 4 &divide; 9
+				</div>
+				<transition name="c-fade">
+					<div v-show="currentStep>1">
+						被除数相等时比较结果大小，只需要比较除数。除数越大商越小，除数越小商越大。
+					</div>
+				</transition name="c-fade">
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: { 
+					stepFreezeTime : {
+						step3 : {next:1500},
+						step4 : {next:2500}
+					},
+					dividing9 : false,
+					dividing4 : false,
+					maxSteps : 6
+				},
+				computed : {
+				},
+				methods : {
+					onStep4 (isNext) {
+						if (isNext) {
+							this.dividing9 = true;
+						}
+						else {
+							this.dividing9 = false;
+						}
+					},
+					onStep3 (isNext) {
+						if (isNext) {
+							this.dividing4 = true;
+						}
+						else {
+							this.dividing4 = false;
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

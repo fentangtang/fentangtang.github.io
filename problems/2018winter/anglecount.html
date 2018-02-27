@@ -1,0 +1,152 @@
+<html>
+	<head>
+		<title>有多少个角</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				下图中有几个角?
+				<span class="c-anwser" v-show="currentStep == maxSteps">
+					36 个
+					<i class="fas fa-check"></i>
+				</span>
+				<div class="c-question-comment">
+					这里没有考虑360°的角。
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="runSteps"
+					:style="{visibility:currentStep==1?'visible':'hidden'}"> 开始 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<div class="c-step">
+				<h3>计数 <span>{{counter}}</span> <span v-show="currentStep==14">&times; 3 = {{counter*3}}</span></h3>
+				<svg width="80%" height="450" style="margin:0 auto" viewBox="0,0,500,500">
+					<line stroke="#600000" id="svg_1" y2="427" x2="22" y1="39" x1="345" stroke-width="2" fill="none"/>
+					<line stroke="#206020" id="svg_2" y2="423" x2="456" y1="33" x1="179" stroke-width="2" fill="none"/>
+					<line stroke="#002060" id="svg_3" y2="323" x2="482" y1="339" x1="2"  stroke-width="2" fill="none"/>
+					<path v-show="currentStep==2" stroke="black" :fill="colors[0]" stroke-width="2"
+						d="
+							M 226 99 
+							A 52 52 0 0 1 291.7 103
+							L 257.5 143.6
+							Z
+						"/>
+					<path v-show="currentStep==3" stroke="black" :fill="colors[0]" stroke-width="2"
+						d="
+							M 291.7 103 
+							A 52 52 0 0 1 287.7 186.5
+							L 257.5 143.6
+							Z
+						"/>
+					<path v-show="currentStep==4" stroke="black" :fill="colors[0]" stroke-width="2"
+						d="
+							M 287.7 186.5 
+							A 52 52 0 0 1 225 183
+							L 257.5 143.6
+							Z
+						"/> 
+					<path v-show="currentStep==5" stroke="black" :fill="colors[0]" stroke-width="2"
+						d="
+							M 225 183 
+							A 52 52 0 0 1 226 99
+							L 257.5 143.6
+							Z
+						"/>
+
+					<path v-show="currentStep==6" stroke="black" :fill="colors[1]" stroke-width="2"
+						d="
+							M 226 99 
+							A 52 52 0 0 1 287.7 186.5
+							Z
+						"/>
+					<path v-show="currentStep==7" stroke="black" :fill="colors[1]" stroke-width="2"
+						d="
+							M 291.7 103 
+							A 52 52 0 0 1 225 183
+							Z
+						"/>
+					<path v-show="currentStep==8" stroke="black" :fill="colors[1]" stroke-width="2"
+						d="
+							M 287.7 186.5 
+							A 52 52 0 0 1 226 99
+							Z
+						"/>
+					<path v-show="currentStep==9" stroke="black" :fill="colors[1]" stroke-width="2"
+						d="
+							M 225 183 
+							A 52 52 0 0 1 291.7 103
+							Z
+						"/>
+
+					<path v-show="currentStep==10" stroke="black" :fill="colors[2]" stroke-width="2"
+						d="
+							M 226 99 
+							A 52 52 0 1 1 225 183
+							L 257.5 143.6
+							Z
+						"/>
+					<path v-show="currentStep==11" stroke="black" :fill="colors[2]" stroke-width="2"
+						d="
+							M 291.7 103 
+							A 52 52 0 1 1 226 99
+							L 257.5 143.6
+							Z
+						"/>
+					<path v-show="currentStep==12" stroke="black" :fill="colors[2]" stroke-width="2"
+						d="
+							M 287.7 186.5 
+							A 52 52 0 1 1 291.7 103
+							L 257.5 143.6
+							Z
+						"/>
+					<path v-show="currentStep==13" stroke="black" :fill="colors[2]" stroke-width="2"
+						d="
+							M 225 183 
+							A 52 52 0 1 1 287.7 186.5
+							L 257.5 143.6
+							Z
+						"/>
+					<circle v-show="currentStep==14" cx="257.5" cy="143.6" r="52" fill="none" stroke-width="2" :stroke="colors[3]"/>
+					<circle v-show="currentStep==14" cx="99" cy="335" r="52" fill="none" stroke-width="2" :stroke="colors[3]"/>
+					<circle v-show="currentStep==14" cx="386" cy="325" r="52" fill="none" stroke-width="2" :stroke="colors[3]"/>
+				</svg>
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					counter : 0,
+					colors : ['#13cb5d', '#13cbb3', '#1358cb', '#f0c058'],
+					maxSteps : 14 
+				},
+				computed : {
+				},
+				methods : {
+					runSteps () {
+						if (!this.next())
+							return;
+						this.counter ++;
+						setTimeout(()=>{
+							this.runSteps();
+						}, 700);
+					},
+					onStep2(isForward) {
+					},
+					onStep14(isForward) {
+						return false;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

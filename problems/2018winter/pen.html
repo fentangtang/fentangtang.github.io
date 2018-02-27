@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>圆珠笔和钢笔</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				三盒圆珠笔价格等于两盒钢笔价格。购买9盒圆珠笔4盒钢笔一共花费520元。求一盒钢笔价格？
+				<span class="c-anwser" v-show="currentStep>3">
+					52 元
+					<i class="fas fa-check"></i>
+				</span>
+				<div class="c-question-comment">
+					本题的数字有点问题，按照题目给出的数字，只能得出钢笔价格，圆珠笔价格无法除尽。<br>
+					不过题目也没有问圆珠笔价格。重要是解题思路。
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<div class="c-step">
+				<div class="c-inline-row">
+					<span v-show="currentStep<3" style="text-align:center;">
+						<img width="100" src="oilpenbox.png"><br>
+						<img width="100" src="oilpenbox.png">
+						<img width="100" src="oilpenbox.png">
+					</span>
+					<span v-show="currentStep>=3" style="text-align:center;">
+						<img width="100" src="penbox.png"><br>
+						<img width="100" src="penbox.png">
+						<img width="100" src="penbox.png">
+					</span>
+					<i class="fas fa-plus c-big"></i>
+					<img width="150" src="penbox.png">
+					<img width="150" src="penbox.png">
+					<span class="c-exbig">=</span>
+					<b class="c-exbig">520 元<b>
+				</div>
+				<transition name="c-fade">
+					<div class="c-inline-row c-box-shadow" style="text-align:center" v-show="currentStep==2">
+						<img width="100" src="oilpenbox.png">
+						<span class="c-exbig">=</span>
+						<img width="150" src="penbox.png">
+					</div>
+				</transition>
+				<transition name="c-fade">
+					<div class="c-inline-row" style="text-align:center" v-show="currentStep>3">
+						<br>
+						<i class="far fa-hand-point-down c-exbig"></i>
+						<br>
+						<br>
+						<span class="c-big">
+							520 元 &divide; （9 盒圆珠笔 &divide; 3 盒圆珠笔 &times; 2 盒钢笔 + 4 盒钢笔）<br>
+							= 520 元 &divide; 10 盒钢笔<br>
+							= 52 元
+						</span>
+					</div>
+				</transition>
+			</div>
+		</div>
+		<script> 
+
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 4
+				},
+				computed : {
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

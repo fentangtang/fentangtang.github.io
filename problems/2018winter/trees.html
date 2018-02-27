@@ -1,0 +1,117 @@
+<html>
+	<head>
+		<title>鱼塘栽树</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			#fishpool {
+				width:480px;
+				height:300px;
+				margin:2em auto;
+				border-style:solid;
+				border-width:2px;
+				border-top-color:#efb893;
+				border-right-color:#e79965;
+				border-bottom-color:#d37b40;
+				border-left-color:#aa5c28;
+				background-image:url(pool-bg.png);
+			}
+			#fishpool > div {
+				position:absolute;
+			}
+			#fishpool i {
+				position:absolute;
+				display:block;
+				font-size:2em;
+			}
+			.grp1 {
+				color:#54df46;
+				top:-38px;
+			}
+			.grp2 {
+				color:#3079ca;
+				left:485px;
+			}
+			.grp3 {
+				color:#2fac22;
+				top:304px;
+			}
+			.grp4 {
+				color:#18579e;
+				left:-28px;
+			}
+			#tree-1 { left:-28px; }
+			#tree-2,#tree-21 { left:36px; }
+			#tree-3,#tree-20 { left:100px; }
+			#tree-4,#tree-19 { left:164px; }
+			#tree-5,#tree-18 { left:229px; }
+			#tree-6,#tree-17 { left:293px; }
+			#tree-7,#tree-16 { left:357px; }
+			#tree-8,#tree-15 { left:421px; }
+
+			#tree-9 { top:-38px; }
+			#tree-10,#tree-26 { top:30px; }
+			#tree-11,#tree-25 { top:99px; }
+			#tree-12,#tree-24 { top:162px; }
+			#tree-13,#tree-23 { top:236px; }
+
+			#tree-14 { left:485px; }
+			#tree-22 { top:304px; }
+				
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				长64米宽40米的鱼塘，在四周栽树，要求每个角都栽。每8米栽一棵，一共栽多少棵？
+				<span class="c-anwser" v-show="currentStep == maxSteps">
+					26 棵
+					<i class="fas fa-check"></i>
+				</span>
+				<div class="c-question-comment">
+					本题做对了，但是步骤过于繁琐，要静心思考比较简洁的思路。
+				</div>
+			</div>
+			<div class="c-step">
+				<div style="margin:0 0 3em 0;">
+					仔仔已经发现，这道题的关键是不能重复计算拐角处的树。但是仔细考虑，本题中拐角处的树并不会被重复计算，把它们归入某一条边就行了。<br>
+					计算每条边的时候，普通情况下的公式是 <b>边长 &divide; 间距 + 1</b>。+1是为了补上终点的那一棵树，这道题中，终点那棵树是接下来那条边的起点，就不需要加一了。<br>
+					所以计算思路就变成了 <b>( 长 &divide; 间距 + 宽 &divide; 间距 ) &times; 2</b>
+				</div>
+				<div id="fishpool">
+					<div>
+						<i v-for="n in 26" :id="'tree-'+n" class="fas fa-tree" :class="treeClass(n)"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script> 
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 1
+				},
+				computed : {
+				},
+				methods : { 
+					treeClass (n) {
+						var cls = {};
+						if (n < 9)
+							cls.grp1 = true;
+						else if (n < 14)
+							cls.grp2 = true;
+						else if (n < 22)
+							cls.grp3 = true;
+						else
+							cls.grp4 = true;
+						return cls;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

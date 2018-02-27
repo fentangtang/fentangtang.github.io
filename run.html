@@ -1,0 +1,304 @@
+<html>
+	<head>
+		<script src="lib/vue.js"></script>
+		<style>
+			body {
+				margin:0;
+			}
+			#app {
+				width:80%;
+				margin:10% auto 0 auto;
+				padding:0;
+			}
+			#allpeople {
+			}
+			#allpeople div {
+				text-align:left;
+				width:2em;
+				margin-bottom:3px;
+			}
+			#walker {
+				color:#db4857;
+			}
+			#biker {
+				color:#4857db;
+				margin-left:-1.5em;
+			}
+			#road {
+				border-bottom:5px solid black;
+			}
+			#walker.step1 {
+				animation-name: kf_walk1; 
+				animation-duration: 4s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			#walker.step2 {
+				animation-name: kf_walk2; 
+				animation-duration: 3s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			#biker.step1 {
+				animation-name: kf_bike; 
+				animation-duration: 3s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			#walker.stop1 {
+				margin-left:50%;
+			}
+			@keyframes kf_bike {
+				from {
+					margin-left:0;
+				}
+				to {
+					margin-left:80%;
+				}
+			}
+			@keyframes kf_walk1 {
+				from {
+					margin-left:0;
+				}
+				to {
+					margin-left:50%;
+				}
+			}
+			@keyframes kf_walk2 {
+				from {
+					margin-left:50%;
+				}
+				to {
+					margin-left:80%;
+				}
+			}
+			.trace {
+				height:4px;
+				margin-top:2px;
+				width:0;
+			} 
+			.trace.hide {
+				opacity:0;
+			} 
+			#walktrace1 {
+				background-color:#db4857;
+			}
+			#walktrace2 {
+				background-color:#eb6867;
+				margin-left:50%;
+			}
+			#biketrace {
+				background-color:#4857db;
+			}
+			#walktrace1.step {
+				animation-name: kf_walktrace1; 
+				animation-duration: 4s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			#walktrace2.step {
+				animation-name: kf_walktrace2; 
+				animation-duration: 3s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			#biketrace.step {
+				animation-name: kf_biketrace; 
+				animation-duration: 3s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			@keyframes kf_walktrace1 {
+				from {
+					width:0;
+				}
+				to {
+					width:50%;
+				}
+			}
+			@keyframes kf_walktrace2 {
+				from {
+					width:0;
+				}
+				to {
+					width:30%;
+				}
+			}
+			@keyframes kf_biketrace {
+				from {
+					width:0;
+				}
+				to {
+					width:80%;
+				}
+			}
+			#huntingtrace {
+				background-color:#68eb67;
+			}
+			#huntingtrace-moving {
+				background-color:#88eb77;
+			}
+			#huntingtrace.step {
+				animation-name: kf_walktrace1; 
+				animation-duration: 3s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			#huntingtrace-moving.step {
+				animation-name: kf_movinghuntingtrace; 
+				animation-duration: 3s;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+			@keyframes kf_huntingtrace {
+				from {
+					width:50%;
+				}
+				to {
+					width:0;
+				}
+			}
+			@keyframes kf_movinghuntingtrace {
+				from {
+					width:50%;
+					margin-left:0;
+				}
+				to {
+					width:0;
+					margin-left:80%;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="lib/fontawesome-all.css">
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				<h4> {{stages[curStage].name}}</h4>
+			</div>
+			<div id="huntingtrace-moving" class="trace" :class="objs.moveingHuntingtrace.cls"></div>
+			<div id="allpeople">
+				<div id="biker" :class="objs.bike.cls"><i class="fas fa-bicycle"></i></div>
+				<div id="walker" :class="objs.walker.cls"><i class="fas fa-child"></i></div>
+			</div>
+			<div id="road"></div>
+			<div id="walktrace1" class="trace" :class="objs.walktrace1.cls"></div>
+			<div id="walktrace2" class="trace" :class="objs.walktrace2.cls"></div>
+			<div id="huntingtrace" class="trace" :class="objs.huntingtrace.cls"></div>
+			<div id="biketrace" class="trace" :class="objs.biketrace.cls"></div>
+		</div>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					objs : {
+						bike : {
+							cls : {}
+						},
+						walker : {
+							cls : {}
+						}, 
+						walktrace1 : {
+							cls : 'hide'
+						},
+						walktrace2 : {
+							cls : 'hide'
+						},
+						biketrace : {
+							cls : 'hide'
+						},
+						huntingtrace : {
+							cls : {}
+						},
+						moveingHuntingtrace : {
+							cls : {}
+						}
+					},
+					curStage : 0,
+					stages : [
+						{
+							name: '步行出发',
+							timer : 2000,
+							bike : {
+							}
+						}, {
+							name: '走400米',
+							timer : 5000,
+							bike : {
+							},
+							walker : {
+								cls : 'step1'
+							},
+							walktrace1 : {
+								cls : 'step'
+							}
+						}, {
+							name: '出发骑车追赶',
+							timer : 2000,
+							walker : {
+								cls : 'stop1'
+							},
+							bike : {
+							}
+						}, {
+							name: '追击',
+							timer : 4500,
+							bike : {
+								cls : 'step1'
+							},
+							walker : {
+								cls : 'step2'
+							},
+							walktrace2 : {
+								cls : {hide:false, step : true}
+							},
+							biketrace : {
+								cls : {hide:false, step : true}
+							}, 
+							moveingHuntingtrace : {
+								cls : { step:true }
+							},
+							huntingtrace : {
+								cls : { step:true }
+							}
+						},{
+							name: '追上了',
+							timer : 2000,
+							bike : {
+							},
+							walker : {
+							}
+						}
+					]
+				},
+				mounted () {
+					this.runStage();
+				},
+				computed : {
+				},
+				methods : {
+					runStage () {
+						console.log('stage ' + this.curStage);
+						var s = this.stages[this.curStage];
+
+						for (var field in this.objs) {
+							if (s[field] != undefined) {
+								for (var n in this.objs[field]) {
+									if (s[field][n] != undefined)
+										this.objs[field][n] = s[field][n];
+								}
+							}
+						}
+
+						if (this.curStage >= this.stages.length-1)
+							return;
+						setTimeout (()=>{
+							this.curStage ++;
+							this.runStage();
+						}, s.timer)
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

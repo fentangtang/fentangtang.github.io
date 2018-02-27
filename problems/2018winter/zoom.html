@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<title>角度与放大镜</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			#img-container {
+				width:200px;
+				margin: 0 auto;
+				cursor:crosshair;
+			}
+			#img-container img {
+				width:100%;
+			}
+			#magnifier-mask {
+				position:absolute;
+				z-index:2;
+				width:200px;
+				height:200px;
+			}
+			#magnifier-root {
+				position:absolute;
+				width:0;
+				height:0;
+				z-index:1;
+			}
+			#magnifier {
+				position:absolute;
+				top:1px;
+				left:10px;
+				width:51px;
+				height:51px;
+				border-radius:50%;
+				border:2px solid #555;
+				background-image:url(zoom.png);
+			}
+			#magnifier:after {
+				content:' ';
+				display:block;
+				border:2px solid #555;
+				background-color:#777;
+				width:30px;
+				height:4px;
+				transform:translate(45px,44px)  rotate(30deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h3>放大缩小不会改变角度和形状。将鼠标移动到图片上观察:</h3>
+			<div id="img-container" class="c-box-shadow">
+				<div id="magnifier-root"><div id="magnifier" v-show="magVisible" :style="magStyle"></div></div>
+				<div id="magnifier-mask" @mouseenter="showMagnifier" @mouseleave="hideMagnifier" @mousemove="moveMag"></div>
+				<img id="zoomimg" src="zoom.png">
+			</div>
+		</div>
+		<script> 
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					magVisible : false,
+					x : 0,
+					y : 0,
+					bgPosition : '0 0',
+				},
+				computed : { 
+					magStyle () {
+						return {top:this.y, left:this.x, 'background-position':this.bgPosition};
+					}
+				},
+				methods : {
+					showMagnifier (e) {
+						this.x = (e.offsetX - 27) + 'px';
+						this.y = (e.offsetY - 27) + 'px';
+						this.bgPosition = '' + (-4 * e.offsetX + 27) + 'px ' + (-4 * e.offsetY +27) + 'px';
+						this.magVisible = true;
+					},
+					hideMagnifier () {
+						this.magVisible = false;
+					},
+					moveMag (e) {
+						if (e.srcElement.id != "magnifier-mask")
+							return;
+						this.x = (e.offsetX - 27) + 'px';
+						this.y = (e.offsetY - 27) + 'px';
+						this.bgPosition = '' + (-4 * e.offsetX + 27) + 'px ' + (-4 * e.offsetY +27) + 'px';
+						console.log(this.bgPosition);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
