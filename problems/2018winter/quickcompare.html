@@ -1,6 +1,6 @@
-<html>
+﻿<html>
 	<head>
-		<title>���ٱȴ�С</title>
+		<title>快速比大小</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -308,33 +308,33 @@
 					</span>
 				</div>
 				<div class="c-question-comment">
-					ע��۲죬ϸ�ļ��㡣����Ȿ��û���Ѷȣ�ϸ�ļ���Ϳ������ԡ������п���һ�ۿ�������ȷ����ı����Ľⷨ��
-					�������߶�û�������������ˣ����ǹؼ��󿼻�ܿ�ϧ��
+					注意观察，细心计算。这道题本身没有难度，细心计算就可以做对。而且有可以一眼看出来正确结果的便利的解法。
+					但是两者都没有做到就做错了，若是关键大考会很可惜。
 				</div>
 			</div>
 			<div class="c-btn-container">
 				<button @click="prev" 
-					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> ��һ�� </button>
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
 				<button @click="next"
-					:style="{visibility:showNext?'visible':'hidden'}"> ��һ�� <i class="fas fa-angle-double-right"></i> </button>
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep>5">
-					<h3>�ص����⣬ԭ��Ŀ��ͨ������򵥵�4&times;9=36�����</h3>
+					<h3>回到本题，原题目可通过口算简单的4&times;9=36化简成</h3>
 					<div class="c-inline-row">
 						<span class="c-big">360 &divide; 45</span>
 						<span class="circle"></span>
 						<span class="c-big">360 &divide; 36</span>
 					</div>
-					<h3>�Ϳ��Կ�ֱ���жϴ��ˡ�</h3>
+					<h3>就可以可直接判断答案了。</h3>
 				</div>
 			</transition>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep>2">
-					<h3>��ôһ������ &divide; 4 �� &divide; 9��������˵�����Ƕ��٣�</h3>
+					<h3>那么一个数先 &divide; 4 又 &divide; 9，整体来说除数是多少？</h3>
 					<transition name="c-fade">
 						<div class="c-inline-row" v-show="currentStep>4" style="margin-top:2em;">
-							���ԣ�
+							所以：
 							<span class="circle"></span><span class="c-big"> &divide; 4 &divide; 9</span>
 							<span class="c-big">=</span>
 							<span class="circle"></span><span class="c-big"> &divide; ( 4 &times; 9 )</span>
@@ -384,7 +384,7 @@
 				</div>
 			</transition>
 			<div class="c-step">
-				<h3>��ϸ�Ķ��۲���Ŀ��Զ�ǵ�һ��</h3>
+				<h3>仔细阅读观察题目永远是第一步</h3>
 				<transition name="c-fade">
 					<div v-show="currentStep>1" style="
 							margin-top:2em;
@@ -394,14 +394,14 @@
 							border-top:1px solid blue;
 							border-radius:30px 30px 0 0;
 							text-align:center;
-						">���</div>
+						">相等</div>
 				</transition>
 				<div class="c-inline-row" style="min-width:260px">
 					<span :class="{'circle-number':currentStep>1}">360</span> &divide; 45 <span class="circle"></span><span :class="{'circle-number':currentStep>1}">360</span> &divide; 4 &divide; 9
 				</div>
 				<transition name="c-fade">
 					<div v-show="currentStep>1">
-						���������ʱ�ȽϽ����С��ֻ��Ҫ�Ƚϳ���������Խ����ԽС������ԽС��Խ��
+						被除数相等时比较结果大小，只需要比较除数。除数越大商越小，除数越小商越大。
 					</div>
 				</transition name="c-fade">
 			</div>

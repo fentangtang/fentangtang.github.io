@@ -1,6 +1,7 @@
-<html>
+﻿<html>
 	<head>
-		<title>���Ӻ�����</title>
+		<title>桌子和椅子</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -24,41 +25,41 @@
 	<body>
 		<div id="app">
 			<div class="c-original-question">
-				��������һ�������ܼ�1280Ԫ��һ�������İ������ܼ�620Ԫ����һ�����Ӷ���Ԫ��һ�����Ӷ���Ԫ��
+				四张桌子一把椅子总价1280元，一张桌子四把椅子总价620元。则一张桌子多少元，一把椅子多少元？
 				<span class="c-anwser" v-show="currentStep==maxSteps">
-					һ������300Ԫ��һ������80Ԫ
+					一张桌子300元，一把椅子80元
 					<i class="fas fa-check"></i>
 				</span>
 				<div class="c-question-comment">
-					���˼�����ҵ����ɣ���Ҫ����ʹ�ù�ʽ������Ľ���˼·��
+					灵活思考，找到规律，不要死板使用公式和例题的解题思路。
 				</div>
 			</div>
 			<div class="c-btn-container">
 				<button @click="prev" 
-					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> ��һ�� </button>
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
 				<button @click="next"
-					:style="{visibility:showNext?'visible':'hidden'}"> ��һ�� <i class="fas fa-angle-double-right"></i> </button>
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep > 8">
-					<h3>����</h3>
+					<h3>所以</h3>
 					<div class="c-inline-row">
 						<span class="chair table-chair"></span>
-						<span class="c-big"> = 240 Ԫ &divide; 3 = 80 Ԫ </span>
+						<span class="c-big"> = 240 元 &divide; 3 = 80 元 </span>
 					</div>
-					<h4>�����Է����������ӵļ۸�</h4>
+					<h4>最后可以方便的求出桌子的价格。</h4>
 				</div>
 			</transition>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep > 5">
-					<h3>��һ������ʽ�Ⱥ����߶�����5�� </h3>
+					<h3>上一步的算式等号两边都除以5： </h3>
 					<div class="c-inline-row" style="padding:0.5em; color:blue;">
 						<span class="chair table-chair"></span><span class="table-chair table"></span>
-						<span class="c-big">= 1900 &divide; 5 = 380 Ԫ</span>
+						<span class="c-big">= 1900 &divide; 5 = 380 元</span>
 					</div>
 					<transition name="c-fade">
 						<div class="c-inline-row" v-show="currentStep > 6">
-							<h4>�֣���Ŀ�Ѿ���������һ�������İ������ܼ�620Ԫ</h4>
+							<h4>又，题目已经告诉我们一张桌子四把椅子总价620元</h4>
 							<span style="border:1px solid #aaa">
 								<span v-for="n in 3" class="chair table-chair"></span>
 							</span>
@@ -67,23 +68,23 @@
 								<span class="table-chair table"></span>
 								<br>
 								<span class="c-big">
-									380 Ԫ
+									380 元
 								</span>
 							</span>
-							<span class="c-big"> = 620 Ԫ </span>
+							<span class="c-big"> = 620 元 </span>
 						</div>
 					</transition>
 					<transition name="c-fade">
 						<div class="c-inline-row" v-show="currentStep > 7">
 							<span v-for="n in 3" class="chair table-chair"></span>
-							<span class="c-big"> = 620 Ԫ - 380 Ԫ = 240 Ԫ </span>
+							<span class="c-big"> = 620 元 - 380 元 = 240 元 </span>
 						</div>
 					</transition>
 				</div>
 			</transition>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep > 4">
-					<h3>����ͨ�����ܼ۳��������õ����ӻ����ӵĵ��ۣ���������ҵ�����ܼۣ����ֻ�����ӻ���ֻ�����ӡ�
+					<h3>若想通过用总价除以数量得到桌子或椅子的单价，则必须先找到这个总价，里边只有桌子或者只有椅子。
 					</h3>
 					<div class="c-inline-row">
 						<span v-for="n in 4" class="table table-chair"></span><span class="table-chair chair"></span>
@@ -100,15 +101,15 @@
 					</div>
 					<div class="c-inline-row">
 						<span class="c-big"> = 1280 + 620 </span><br><span class="c-exbig"> = 1900</span><br>
-						<span class="c-big">����˵<b>����</b>�����ܼ�1900Ԫ</span>
+						<span class="c-big">就是说<b>五组</b>桌椅总价1900元</span>
 					</div>
 				</div>
 			</transition>
 			<div class="c-step" v-show="currentStep > 3">
 				<div class="c-inline-row">
-					<span style="width:10px;height:10px;border:1px solid blue"></span>������
+					<span style="width:10px;height:10px;border:1px solid blue"></span>被减数
 					<span> </span>
-					<span style="width:10px;height:10px;border:1px solid red"></span>����
+					<span style="width:10px;height:10px;border:1px solid red"></span>减数
 				</div>
 				<div class="c-inline-row">
 					<span style="padding:.5em;border:1px solid blue">
@@ -122,17 +123,17 @@
 				</div>
 				<div class="c-error-msg" v-show="currentStep>1">
 					<i class="fas fa-times-circle" style="font-size:2em;color:red"></i>
-					���֮�󣬵õ�����3�����ӱ�3�����ӹ����Ǯ��<br>
-					�������ͬʱ &divide; 3 = 220����ʱ�õ�����һ�����ӱ�һ�����ӹ�220Ԫ��<br>
-					��ʽ����ͬʱ &divide; 6 = 110���Ⲣ���ܴ���ʲôʵ�����塣
+					相减之后，得到的是3张桌子比3张椅子贵多少钱。<br>
+					如果除以同时 &divide; 3 = 220，此时得到的是一张桌子比一张椅子贵220元。<br>
+					等式两边同时 &divide; 6 = 110，这并不能代表什么实际意义。
 				</div>
 			</div>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep == 3">
 					<div class="c-inline-row">
-						<span style="width:10px;height:10px;border:1px solid blue"></span>������
+						<span style="width:10px;height:10px;border:1px solid blue"></span>被减数
 						<span> </span>
-						<span style="width:10px;height:10px;border:1px solid red"></span>����
+						<span style="width:10px;height:10px;border:1px solid red"></span>减数
 					</div>
 					<div class="c-inline-row">
 						<span style="padding:.5em;border:1px solid blue">
@@ -164,8 +165,8 @@
 			<div class="c-step">
 				<transition name="c-fade">
 					<div class="c-error-msg" v-show="currentStep>1">
-						<i class="fas fa-times-circle" style="font-size:2em;color:red"></i> ���н��ⲽ���ƺ���ֱ���հ�ѧ�������⣬
-						�� ��1280 - 620�� &divide;  6���϶��Ǵ����
+						<i class="fas fa-times-circle" style="font-size:2em;color:red"></i> 仔仔解题步骤似乎是直接照搬学过的例题，
+						用 （1280 - 620） &divide;  6。肯定是错误的
 					</div>
 				</transition>
 				<transition name="c-fade">
@@ -173,12 +174,12 @@
 						<div class="c-inline-row">
 							<span v-for="n in 4" class="table table-chair"></span>
 							<span class="table-chair chair"></span>
-							<span class="c-big"> = 1280 Ԫ </span>
+							<span class="c-big"> = 1280 元 </span>
 						</div>
 						<div class="c-inline-row">
 							<span v-for="n in 4" class="chair table-chair"></span>
 							<span class="table-chair table"></span>
-							<span class="c-big"> = 620 Ԫ </span>
+							<span class="c-big"> = 620 元 </span>
 						</div>
 					</div>
 				</transition>

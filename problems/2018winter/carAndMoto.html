@@ -1,6 +1,7 @@
-<html>
+﻿<html>
 	<head>
-		<title>����Ħ�г�</title>
+		<title>快速摩托车</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -141,40 +142,40 @@
 		<div id="app">
 			<div class="c-original-question">
 				<div class="c-inline-row">
-					һ��С������һ��Ħ�г�ͬʱ�Ӽ��������360ǧ��������򡣵�Ħ�г���������ʱ��С��������������40ǧ�ס�
-					��֪С����ʱ��64ǧ�ס���ôĦ�г�ʱ�ٱ�С��������٣�
+					一辆小汽车和一辆摩托车同时从甲镇开往相距360千米外的乙镇。当摩托车到达乙镇时，小汽车距离乙镇还有40千米。
+					已知小汽车时速64千米。那么摩托车时速比小汽车快多少？
 					<span class="c-anwser" v-show="currentStep==maxSteps">
-						8ǧ��/Сʱ
+						8千米/小时
 						<i class="fas fa-check"></i>
 					</span>
 				</div>
 			</div>
 			<div class="c-btn-container">
 				<button @click="prev" 
-					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> ��һ�� </button>
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
 				<button @click="next"
-					:style="{visibility:showNext?'visible':'hidden'}"> ��һ�� <i class="fas fa-angle-double-right"></i> </button>
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep>3">
 					<div class="c-inline-row">
-						<span class="task">��Ħ�г�����������٣� ��֪�����ٶ�</span>
-						<span class="connector">��Ҫ<i class="fas fa-long-arrow-alt-right"></i></span>
-						<span class="task">��Ħ�г��ٶȣ���֪����</span>
-						<span class="connector">��Ҫ<i class="fas fa-long-arrow-alt-right"></i></span>
-						<span class="task">��Ħ�г���ʻʱ��</span>
-						<span class="connector">����<i class="fas fa-long-arrow-alt-right"></i></span>
-						<span class="task">������ʻʱ�䡣��֪�����ٶ�</span>
-						<span class="connector">��Ҫ������ʻ����<i class="fas fa-long-arrow-alt-right"></i></span>
-						<span class="task">������ʻ���� = 360 - 40</span>
+						<span class="task">求摩托车比汽车快多少， 已知汽车速度</span>
+						<span class="connector">需要<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">求摩托车速度，已知距离</span>
+						<span class="connector">需要<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">求摩托车行驶时间</span>
+						<span class="connector">等于<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">汽车行驶时间。已知汽车速度</span>
+						<span class="connector">需要汽车行驶距离<i class="fas fa-long-arrow-alt-right"></i></span>
+						<span class="task">汽车行驶距离 = 360 - 40</span>
 					</div>
 				</div>
 			</transition>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep>1">
-					<h3>��ô��������������ȵ�Ԫ����ʲô��</h3>
+					<h3>那么本题中两辆车相等的元素是什么？</h3>
 					<transition name="c-fade">
-					<h3 v-show="currentStep>2">�ǣ�ʱ�䡣������ͬʱ��������ʻ��ʱ����ͬ�����롢�ٶȲ�ͬ��</h3>
+					<h3 v-show="currentStep>2">是：时间。两辆车同时出发，行驶的时间相同，距离、速度不同。</h3>
 					</transition>
 					<div style="margin-bottom:2em">
 						<div id="motobike" :class="{running:running}"><i class="fas fa-motorcycle"></i></div>
@@ -185,13 +186,13 @@
 				</div>
 			</transition>
 			<div class="c-step">
-				<h3>�����ٶȵ���Ŀ����Ҫ�أ���֪�κ����������Ƶ���������</h3>
+				<h3>关于速度的题目三个要素，已知任何两个可以推导第三个。</h3>
 				<div id="three-keys">
-					<div id="key-distance">����</div>
-					<div id="key-time">ʱ��</div>
-					<div id="key-speed">�ٶ�</div>
+					<div id="key-distance">距离</div>
+					<div id="key-time">时间</div>
+					<div id="key-speed">速度</div>
 				</div>
-				<h3>�������������ٶȵ����⣬�ؼ������ҵ�������ȵ��Ǹ�Ԫ�ء�</h3>
+				<h3>对于两个物体速度的问题，关键在于找到它们相等的那个元素。</h3>
 			</div>
 		</div>
 		<script> 

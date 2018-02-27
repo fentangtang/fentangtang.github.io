@@ -1,6 +1,6 @@
-<html>
+﻿<html>
 	<head>
-		<title>��������</title>
+		<title>鱼塘栽树</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -66,20 +66,20 @@
 	<body>
 		<div id="app">
 			<div class="c-original-question">
-				��64�׿�40�׵�������������������Ҫ��ÿ���Ƕ��ԡ�ÿ8����һ�ã�һ���Զ��ٿã�
+				长64米宽40米的鱼塘，在四周栽树，要求每个角都栽。每8米栽一棵，一共栽多少棵？
 				<span class="c-anwser" v-show="currentStep == maxSteps">
-					26 ��
+					26 棵
 					<i class="fas fa-check"></i>
 				</span>
 				<div class="c-question-comment">
-					���������ˣ����ǲ�����ڷ�����Ҫ����˼���Ƚϼ���˼·��
+					本题做对了，但是步骤过于繁琐，要静心思考比较简洁的思路。
 				</div>
 			</div>
 			<div class="c-step">
 				<div style="margin:0 0 3em 0;">
-					�����Ѿ����֣������Ĺؼ��ǲ����ظ�����սǴ�������������ϸ���ǣ������йսǴ����������ᱻ�ظ����㣬�����ǹ���ĳһ���߾����ˡ�<br>
-					����ÿ���ߵ�ʱ����ͨ����µĹ�ʽ�� <b>�߳� &divide; ��� + 1</b>��+1��Ϊ�˲����յ����һ������������У��յ��ǿ����ǽ����������ߵ���㣬�Ͳ���Ҫ��һ�ˡ�<br>
-					���Լ���˼·�ͱ���� <b>( �� &divide; ��� + �� &divide; ��� ) &times; 2</b>
+					仔仔已经发现，这道题的关键是不能重复计算拐角处的树。但是仔细考虑，本题中拐角处的树并不会被重复计算，把它们归入某一条边就行了。<br>
+					计算每条边的时候，普通情况下的公式是 <b>边长 &divide; 间距 + 1</b>。+1是为了补上终点的那一棵树，这道题中，终点那棵树是接下来那条边的起点，就不需要加一了。<br>
+					所以计算思路就变成了 <b>( 长 &divide; 间距 + 宽 &divide; 间距 ) &times; 2</b>
 				</div>
 				<div id="fishpool">
 					<div>

@@ -1,6 +1,7 @@
-<html>
+ï»¿<html>
 	<head>
-		<title>ÓÐ¶àÉÙ¸ö½Ç</title>
+		<title>æœ‰å¤šå°‘ä¸ªè§’</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -12,21 +13,21 @@
 	<body>
 		<div id="app">
 			<div class="c-original-question">
-				ÏÂÍ¼ÖÐÓÐ¼¸¸ö½Ç?
+				ä¸‹å›¾ä¸­æœ‰å‡ ä¸ªè§’?
 				<span class="c-anwser" v-show="currentStep == maxSteps">
-					36 ¸ö
+					36 ä¸ª
 					<i class="fas fa-check"></i>
 				</span>
 				<div class="c-question-comment">
-					ÕâÀïÃ»ÓÐ¿¼ÂÇ360¡ãµÄ½Ç¡£
+					è¿™é‡Œæ²¡æœ‰è€ƒè™‘360Â°çš„è§’ã€‚
 				</div>
 			</div>
 			<div class="c-btn-container">
 				<button @click="runSteps"
-					:style="{visibility:currentStep==1?'visible':'hidden'}"> ¿ªÊ¼ <i class="fas fa-angle-double-right"></i> </button>
+					:style="{visibility:currentStep==1?'visible':'hidden'}"> å¼€å§‹ <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<div class="c-step">
-				<h3>¼ÆÊý <span>{{counter}}</span> <span v-show="currentStep==14">&times; 3 = {{counter*3}}</span></h3>
+				<h3>è®¡æ•° <span>{{counter}}</span> <span v-show="currentStep==14">&times; 3 = {{counter*3}}</span></h3>
 				<svg width="80%" height="450" style="margin:0 auto" viewBox="0,0,500,500">
 					<line stroke="#600000" id="svg_1" y2="427" x2="22" y1="39" x1="345" stroke-width="2" fill="none"/>
 					<line stroke="#206020" id="svg_2" y2="423" x2="456" y1="33" x1="179" stroke-width="2" fill="none"/>

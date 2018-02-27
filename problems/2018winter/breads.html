@@ -1,6 +1,7 @@
-<html>
+﻿<html>
 	<head>
-		<title>�����</title>
+		<title>分面包</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -13,27 +14,27 @@
 		<div id="app">
 			<div class="c-original-question">
 				<div class="c-inline-row">
-					���ұ����������ʱ����8�������ƽ���ָ������˳ԡ���û��Ǯ���Ҹ���5�������Ǯ��������3�������Ǯ��
-					�����״�����Ӧ����4Ԫ8��Ǯ���ҡ�����Ӧ�ջض���Ǯ��
+					甲乙丙三人在外出时买了8个面包，平均分给三个人吃。甲没带钱，乙付了5个面包的钱，丙付了3个面包的钱。
+					后来甲带了他应付的4元8角钱，乙、丙各应收回多少钱？
 					<span class="c-anwser" v-show="currentStep==maxSteps">
-						���ջ�4.2Ԫ�����ջ�6�ǡ�
+						乙收回4.2元。丙收回6角。
 						<i class="fas fa-check"></i>
 					</span>
 				</div>
 			</div>
 			<div class="c-btn-container">
 				<button @click="prev" 
-					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> ��һ�� </button>
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
 				<button @click="next"
-					:style="{visibility:showNext?'visible':'hidden'}"> ��һ�� <i class="fas fa-angle-double-right"></i> </button>
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<transition name="c-fade">
 				<div class="c-step" v-show="currentStep>3">
-					<h3>��ô���ұ��ֱ����֧����</h3>
+					<h3>那么，乙丙分别替甲支付了</h3>
 					<div class="c-inline-row">
 						<span class="c-big">
-							�ң� 9 - 4.8 = 4.2 Ԫ<br>
-							���� 5.4 - 4.8 = 0.6 Ԫ<br>
+							乙： 9 - 4.8 = 4.2 元<br>
+							丙： 5.4 - 4.8 = 0.6 元<br>
 						</span>
 					</div>
 				</div>
@@ -42,31 +43,31 @@
 				<div class="c-step" v-show="currentStep>1">
 					<transition name="c-fade">
 						<div v-show="currentStep>2">
-							<h3>�����ұ�ÿ����ʵ��֧����</h3>
+							<h3>所以乙丙每个人实际支付了</h3>
 							<div class="c-inline-row">
 								<span class="c-big">
-									��֧���� 1.8 &times; 5 = 9 Ԫ<br>
-									��֧���� 1.8 &times; 3 = 5.4 Ԫ<br>
+									乙支付了 1.8 &times; 5 = 9 元<br>
+									丙支付了 1.8 &times; 3 = 5.4 元<br>
 								</span>
 							</div>
 						</div>
 					</transition>
-					<h3>����ÿ������۸�</h3>
+					<h3>所以每个面包价格</h3>
 					<div class="c-inline-row">
 						<span class="c-big">
-							14.4 &divide; 8 = 1.8 Ԫ
+							14.4 &divide; 8 = 1.8 元
 						</span>
 					</div>
 				</div>
 			</transition>
 			<div class="c-step">
-				<h3>ÿ���˳Ե�һ���࣬��ǮҲӦ��һ����</h3>
+				<h3>每个人吃的一样多，付钱也应该一样多</h3>
 				<div class="c-inline-row">
 					<span class="c-big">
-						��Ӧ��֧��4.8Ԫ������ÿ���˶�Ӧ��֧��4.8Ԫ��
+						甲应该支付4.8元，所以每个人都应该支付4.8元。
 					</span><br>
 					<span class="c-big">
-						���ԣ�8������ܼ۸�Ӧ���ǣ�4.8 Ԫÿ�� &times; 3 �� = 14.4 Ԫ��
+						所以，8个面包总价格应该是：4.8 元每人 &times; 3 人 = 14.4 元。
 					</span>
 				</div>
 			</div>

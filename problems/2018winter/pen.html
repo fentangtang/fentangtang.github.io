@@ -1,6 +1,6 @@
-<html>
+﻿<html>
 	<head>
-		<title>Բ��ʺ͸ֱ�</title>
+		<title>圆珠笔和钢笔</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
 		<link rel="stylesheet" href="../../lib/common.css">
@@ -12,21 +12,21 @@
 	<body>
 		<div id="app">
 			<div class="c-original-question">
-				����Բ��ʼ۸�������иֱʼ۸񡣹���9��Բ���4�иֱ�һ������520Ԫ����һ�иֱʼ۸�
+				三盒圆珠笔价格等于两盒钢笔价格。购买9盒圆珠笔4盒钢笔一共花费520元。求一盒钢笔价格？
 				<span class="c-anwser" v-show="currentStep>3">
-					52 Ԫ
+					52 元
 					<i class="fas fa-check"></i>
 				</span>
 				<div class="c-question-comment">
-					����������е����⣬������Ŀ���������֣�ֻ�ܵó��ֱʼ۸�Բ��ʼ۸��޷�������<br>
-					������ĿҲû����Բ��ʼ۸���Ҫ�ǽ���˼·��
+					本题的数字有点问题，按照题目给出的数字，只能得出钢笔价格，圆珠笔价格无法除尽。<br>
+					不过题目也没有问圆珠笔价格。重要是解题思路。
 				</div>
 			</div>
 			<div class="c-btn-container">
 				<button @click="prev" 
-					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> ��һ�� </button>
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
 				<button @click="next"
-					:style="{visibility:showNext?'visible':'hidden'}"> ��һ�� <i class="fas fa-angle-double-right"></i> </button>
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<div class="c-step">
 				<div class="c-inline-row">
@@ -44,7 +44,7 @@
 					<img width="150" src="penbox.png">
 					<img width="150" src="penbox.png">
 					<span class="c-exbig">=</span>
-					<b class="c-exbig">520 Ԫ<b>
+					<b class="c-exbig">520 元<b>
 				</div>
 				<transition name="c-fade">
 					<div class="c-inline-row c-box-shadow" style="text-align:center" v-show="currentStep==2">
@@ -60,9 +60,9 @@
 						<br>
 						<br>
 						<span class="c-big">
-							520 Ԫ &divide; ��9 ��Բ��� &divide; 3 ��Բ��� &times; 2 �иֱ� + 4 �иֱʣ�<br>
-							= 520 Ԫ &divide; 10 �иֱ�<br>
-							= 52 Ԫ
+							520 元 &divide; （9 盒圆珠笔 &divide; 3 盒圆珠笔 &times; 2 盒钢笔 + 4 盒钢笔）<br>
+							= 520 元 &divide; 10 盒钢笔<br>
+							= 52 元
 						</span>
 					</div>
 				</transition>
