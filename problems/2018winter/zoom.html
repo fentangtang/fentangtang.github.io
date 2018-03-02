@@ -53,7 +53,8 @@
 			<h3>放大缩小不会改变角度和形状。将鼠标移动到图片上观察:</h3>
 			<div id="img-container" class="c-box-shadow">
 				<div id="magnifier-root"><div id="magnifier" v-show="magVisible" :style="magStyle"></div></div>
-				<div id="magnifier-mask" @mouseenter="showMagnifier" @mouseleave="hideMagnifier" @mousemove="moveMag"></div>
+				<div id="magnifier-mask" @mouseenter="showMagnifier" @mouseleave="hideMagnifier"
+					@ontouchmove="moveMag" @mousemove="moveMag"></div>
 				<img id="zoomimg" src="zoom.png">
 			</div>
 		</div>
