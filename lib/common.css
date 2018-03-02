@@ -131,5 +131,10 @@ html, body {
 @media screen and (max-width:699px) {
 	#app {
 		width:100%;
+		margin-left:.5em;
+		margin-right:.5em;
+		padding-left:0;
+		padding-right:0;
+		width:auto;
 	}
 }
