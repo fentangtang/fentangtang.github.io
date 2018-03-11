@@ -1,0 +1,364 @@
+<html>
+	<head>
+		<title>理解等差数列</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style> 
+			.number-series {
+				vertical-align:bottom;
+				padding-top:1em;
+			}
+			.number-series .item {
+				display:inline-block;
+				border:1px solid #ccc;
+				width:1em;
+				border-right:0px none white;
+			}
+			.number-series .item:last-child {
+				border-right:1px solid #ccc;
+			}
+			.number-series .item:before {
+				content:' ';
+				display:block;
+				height:1em;
+			}
+			.number-series.nostep .item:before {
+				height:0px;
+			}
+			.number-series .item:first-child:before {
+				height:0px;
+			}
+			.number-series .item .top-text {
+				position:absolute;
+				margin-top:-1.5em;
+			}
+
+			.number-series.color1 .item {
+				background-color:#678bcd;
+			}
+			.number-series.color1 .item:hover {
+				background-color:#87abfd;
+			}
+			.number-series.color1 .item:before {
+				background-color:#24248f;
+			}
+			.number-series.color2 .item {
+				background-color:#47b491;
+			}
+			.number-series.color2 .item:hover {
+				background-color:#70e6c0;
+			}
+			.number-series.color2 .item:before {
+				background-color:#097753;
+			}
+
+			/***************************************/
+			@keyframes kf_serial_1 { 
+				0% {
+				}
+				25% {
+					transform:rotate(90deg);
+					margin-left:2em;
+				}
+				100% {
+					transform:rotate(90deg);
+					margin-left:2em;
+				}
+			}
+			@keyframes kf_serial_2 { 
+				0% {
+				}
+				25% {
+					transform:rotate(90deg);
+					margin-left:2em;
+				}
+				50% {
+					transform:rotate(90deg);
+					margin-left:16em;
+				}
+				70% {
+					transform:rotate(-90deg);
+					margin-left:16em;
+				}
+				100% {
+					transform:rotate(-90deg);
+					margin-left:4em;
+				}
+			}
+			.calc-sum {
+				animation-fill-mode: forwards;
+			}
+			.calc-sum.color1 {
+				animation-name: kf_serial_1; 
+				animation-duration: 5s;
+			}
+			.calc-sum.color2 {
+				animation-name: kf_serial_2; 
+				animation-duration: 5s;
+			}
+
+			/***************************************/
+			.calc-item * {
+				animation-duration: 1.5s;
+				animation-delay: 1s;
+				animation-fill-mode: forwards;
+			}
+			@keyframes kf_calc_item_start { 
+				0% { }
+				100% { transform:translate(214px, 0); }
+			}
+			@keyframes kf_calc_item_step4 { 
+				0% { }
+				100% { transform:translate(197px, 0); }
+			}
+			@keyframes kf_calc_item_step5 { 
+				0% { }
+				100% { transform:translate(180px, 0); }
+			}
+			@keyframes kf_calc_item_step6 { 
+				0% { }
+				100% { transform:translate(163px, 0); }
+			}
+			@keyframes kf_calc_item_step7 { 
+				0% { }
+				100% { transform:translate(146px, 0); }
+			}
+			@keyframes kf_calc_item_step8 { 
+				0% { }
+				100% { transform:translate(129px, 0); }
+			}
+			@keyframes kf_calc_item_step9 { 
+				0% { }
+				100% { transform:translate(112px, 0); }
+			}
+			@keyframes kf_calc_item_step10 { 
+				0% { }
+				100% { transform:translate(95px, 0); }
+			}
+			@keyframes kf_calc_item_step11 { 
+				0% { }
+				100% { transform:translate(78px, 0); }
+			}
+			@keyframes kf_calc_item_step12 { 
+				0% { }
+				100% { transform:translate(61px, 0); }
+			}
+
+			.calc-item .item-start { animation-name: kf_calc_item_start; }
+
+			.calc-item .step-4 { animation-name: kf_calc_item_step4; }
+			.calc-item .step-5 { animation-name: kf_calc_item_step5; }
+			.calc-item .step-6 { animation-name: kf_calc_item_step6; }
+			.calc-item .step-7 { animation-name: kf_calc_item_step7; }
+			.calc-item .step-8 { animation-name: kf_calc_item_step8; }
+			.calc-item .step-9 { animation-name: kf_calc_item_step9; }
+			.calc-item .step-10 { animation-name: kf_calc_item_step10; }
+			.calc-item .step-11 { animation-name: kf_calc_item_step11; }
+			.calc-item .step-12 { animation-name: kf_calc_item_step12; }
+			/***************************************/
+
+			.other-step {
+				height:1em;
+				background-color:#24248f;
+			}
+			.calc-item-count * {
+				animation-delay: 1s;
+				animation-duration: 2s;
+				animation-fill-mode: forwards;
+			}
+			@keyframes kf_calc_count_show { 
+				0% {
+					opacity:0;
+				}
+				99% {
+					width:0;
+					opacity:0;
+				}
+				100% {
+					width:1em;
+					opacity:1;
+				}
+			}
+			.calc-item-count .item-2,
+			.calc-item-count .item-3,
+			.calc-item-count .item-4,
+			.calc-item-count .item-5,
+			.calc-item-count .item-6,
+			.calc-item-count .item-7,
+			.calc-item-count .item-8,
+			.calc-item-count .item-9,
+			.calc-item-count .item-10,
+			.calc-item-count .item-11 {
+				width:0;
+				opacity:0;
+				animation-name: kf_calc_count_show;
+			}
+			@keyframes kf_calc_count_step_11 { 0% {} 60% { transform:translate(-17px, 0); } 100% { transform:translate(-17px, 0); }}
+			@keyframes kf_calc_count_step_10 { 0% {} 60% { transform:translate(-34px, 0); } 100% { transform:translate(-34px, 0); }}
+			@keyframes kf_calc_count_step_9 { 0% {} 60% { transform:translate(-51px, 0); } 100% { transform:translate(-51px, 0); } }
+			@keyframes kf_calc_count_step_8 { 0% {} 60% { transform:translate(-68px, 0); } 100% { transform:translate(-68px, 0); } }
+			@keyframes kf_calc_count_step_7 { 0% {} 60% { transform:translate(-85px, 0); } 100% { transform:translate(-85px, 0); } }
+			@keyframes kf_calc_count_step_6 { 0% {} 60% { transform:translate(-102px, 0); } 100% { transform:translate(-102px, 0); } }
+			@keyframes kf_calc_count_step_5 { 0% {} 60% { transform:translate(-119px, 0); } 100% { transform:translate(-119px, 0); } }
+			@keyframes kf_calc_count_step_4 { 0% {} 60% { transform:translate(-136px, 0); } 100% { transform:translate(-136px, 0); } }
+			@keyframes kf_calc_count_step_3 { 0% {} 60% { transform:translate(-153px, 0); } 100% { transform:translate(-153px, 0); } }
+			@keyframes kf_calc_count_step_2 { 0% {} 60% { transform:translate(-170px, 0); } 100% { transform:translate(-170px, 0); } }
+			.calc-item-count .other-step-11 { animation-name: kf_calc_count_step_11; }
+			.calc-item-count .other-step-10 { animation-name: kf_calc_count_step_10; }
+			.calc-item-count .other-step-9 { animation-name: kf_calc_count_step_9; }
+			.calc-item-count .other-step-8 { animation-name: kf_calc_count_step_8; }
+			.calc-item-count .other-step-7 { animation-name: kf_calc_count_step_7; }
+			.calc-item-count .other-step-6 { animation-name: kf_calc_count_step_6; }
+			.calc-item-count .other-step-5 { animation-name: kf_calc_count_step_5; }
+			.calc-item-count .other-step-4 { animation-name: kf_calc_count_step_4; }
+			.calc-item-count .other-step-3 { animation-name: kf_calc_count_step_3; }
+			.calc-item-count .other-step-2 { animation-name: kf_calc_count_step_2; }
+
+			@keyframes kf_calc_count_item_12 {
+				0% {}
+				60% { transform:translate(170px, 0); }
+				99% { transform:translate(170px, 0); }
+				100% { };
+			}
+			.calc-item-count .item-12 { animation-name: kf_calc_count_item_12; }
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="c-original-question">
+				等差数列最关键的一点就是：任何相邻两项的差是一个固定的数值——公差。
+				<div class="c-question-comment">
+				所以，一个最普通的等差数列例子就是自然数：1、2、3、4、5...
+				</div>
+			</div>
+			<div class="c-btn-container">
+				<button @click="prev" 
+					:style="{visibility:showPrev?'visible':'hidden'}"> <i class="fas fa-angle-double-left"></i> 上一步 </button>
+				<button @click="next"
+					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
+			</div>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>6">
+					<h3>等差数列，可以求出公差、已知末项和首项，求项数</h3>
+					<div>
+						<li>首先求出公差。这就像是知道了楼梯中每个台阶的高度。</li>
+						<li>求出末项和首的总差。就像算出终点台阶和起点台阶之间的总高度差</li>
+						<li>总差 &divide; 公差，得到两项之间的项数差。就是终点台阶和起点台阶之间差了几个台阶。</li>
+						<li>别忘了加上起点台阶。好比，计算台阶的总数时，第一个台阶也要算进去。</li>
+					</div>
+					<transition name="c-fade">
+						<div class="c-inline-row" v-show="currentStep>7">
+							<span class="c-big">项数 = 总差 &divide; 公差 + 1</span>
+						</div>
+					</transition>
+					<div style="margin-top:2em;">
+						<div class="number-series color1" :class="{'calc-item-count':currentStep>6}">
+							<div v-for="n in 12" class="item" :class="'item-'+n" :style="{height:(n+2)+'em'}">
+								<div v-if="n==12">
+									<div v-for="n in 10" style="" class="other-step" :class="'other-step-'+(12-n)"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>4">
+					<h3>等差数列，已知数列的一部分，根据项数求该项的数值</h3>
+					<div>
+						<li>首先求出公差。这就像是知道了楼梯中每个台阶的高度。</li>
+						<li>选择已知的一个项作为起点，找到项数差。就像算出目标台阶与起点台阶之间相差多少级台阶</li>
+						<li>项数差 &times; 公差，得到两项之间的总差。就是目标台阶和当前台阶之间的总高度差。</li>
+						<li>别忘了总差要加上起点项。好比，台阶的总高度差要加上起点台阶原本的高度，这样才是目标台阶的真实高度。</li>
+					</div>
+					<transition name="c-fade">
+						<div class="c-inline-row" v-show="currentStep>5">
+							<span class="c-big">? = 起点 + 公差 &times; 项数差</span>
+						</div>
+					</transition>
+					<div style="margin-top:2em;">
+						<div class="number-series color1 nostep" :class="{'calc-item':currentStep>4}">
+							<div v-for="n in 12" class="item" :class="{'item-start':n==3}" :style="{'border-color':n==3?'#0bef0b':'#ccc',height:(n+2)+'em', 'background-color':n>3&&n<12?'white':'#678bcd'}">
+								<div v-if="n==3" class="top-text " style="margin-left:-2em;color:#0baf0b">起点</div>
+								<div v-if="n==12" class="top-text">?</div>
+								<div v-if="n>3&&n<13" :class="'step-'+n" style="height:1em;background-color:#24248f"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</transition>
+			<transition name="c-fade">
+				<div class="c-step" v-show="currentStep>1">
+					<h3>等差数列求和</h3>
+					<div>
+						注意：
+						<li>每个台阶<b>距离地面的高度</b>是这个台阶对应的数字</li>
+						<li>把每个台阶<b>距离地面的高度</b>加起来，就是整个数列的<b>和</b></li>
+					</div>
+					<transition name="c-fade">
+						<div class="c-inline-row" v-show="currentStep>3">
+							<span class="c-big">和 = (首项 + 末项) &times; 项数 &divide; 2</span>
+						</div>
+					</transition>
+					<div style="height:11em;">
+						<div class="number-series color2 nostep"  style="position:absolute;" :class="{'calc-sum':currentStep>2}">
+							<div v-for="n in 8" class="item" :style="{height:(n+2)+'em'}"></div>
+						</div>
+						<div class="number-series color1 nostep" style="position:absolute;" :class="{'calc-sum':currentStep>2}">
+							<div v-for="n in 8" class="item" :style="{height:(n+2)+'em'}"></div>
+						</div>
+					</div>
+				</div>
+			</transition>
+			<div class="c-step">
+				<h3>等差数列就像是一个楼梯，每个台阶高度都一样</h3>
+				<div>
+					<li>起点是第一个台阶，就是数列的<b>首项</b></li>
+					<li>终点是最后一个台阶，就是数列的<b>末项</b></li>
+					<li>每个台阶的高度，就是<b>公差</b></li>
+					<li>台阶的数量就是<b>项数</b></li>
+				</div>
+				<div class="number-series color1">
+					<div v-for="n in 10" class="item" :style="{height:(n+2)+'em'}"></div>
+				</div>
+
+			</div>
+		</div>
+		<script> 
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 8 , 
+					stepFreezeTime : {
+						step3 : {
+							next:5000
+						},
+						step5 : {
+							next:2500
+						},
+						step7 : {
+							next:2500
+						}
+					}
+				},
+				computed : {
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+					},
+					onStep3 (isNext) {
+						if (isNext) {
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

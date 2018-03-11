@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<title>4个方块</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<script src="../../lib/three.min.js"></script>
+		<style> 
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script> 
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+		var renderer = new THREE.WebGLRenderer();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.setClearColor(0xFFFFFF, 1.0);
+		document.body.appendChild( renderer.domElement );
+
+		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+		var cube = new THREE.Mesh( geometry, material );
+		scene.add( cube );
+		var cube2 = new THREE.Mesh( new THREE.BoxGeometry( 1, 2, 1 ), material );
+		scene.add( cube2 );
+
+		camera.position.z = 5;
+
+		function render() {
+			cube.rotation.x += 0.03;
+			cube2.rotation.y += 0.01;
+			requestAnimationFrame( render );
+			renderer.render( scene, camera );
+		}
+		render();
+		</script> 
+		<!--
+		<div id="app">
+		</div>
+		<script> 
+			var app = new Vue({
+				mixins : [V_MIXIN],
+				el: '#app',
+				data: {
+					maxSteps : 3
+				},
+				computed : {
+				},
+				methods : {
+					onStep1 (isNext) {
+					},
+					onStep2 (isNext) {
+					}
+				}
+			});
+		</script>
+		-->
+	</body>
+</html>
