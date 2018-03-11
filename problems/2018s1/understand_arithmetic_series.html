@@ -104,7 +104,6 @@
 			/***************************************/
 			.calc-item * {
 				animation-duration: 1.5s;
-				animation-delay: 1s;
 				animation-fill-mode: forwards;
 			}
 			@keyframes kf_calc_item_start { 
@@ -166,13 +165,13 @@
 				background-color:#24248f;
 			}
 			.calc-item-count * {
-				animation-delay: 1s;
 				animation-duration: 2s;
 				animation-fill-mode: forwards;
 			}
 			@keyframes kf_calc_count_show { 
 				0% {
 					opacity:0;
+					width:0;
 				}
 				99% {
 					width:0;
@@ -182,6 +181,19 @@
 					width:1em;
 					opacity:1;
 				}
+			}
+			.number-series-count .item-2,
+			.number-series-count .item-3,
+			.number-series-count .item-4,
+			.number-series-count .item-5,
+			.number-series-count .item-6,
+			.number-series-count .item-7,
+			.number-series-count .item-8,
+			.number-series-count .item-9,
+			.number-series-count .item-10,
+			.number-series-count .item-11 {
+				width:0;
+				opacity:0;
 			}
 			.calc-item-count .item-2,
 			.calc-item-count .item-3,
@@ -193,8 +205,6 @@
 			.calc-item-count .item-9,
 			.calc-item-count .item-10,
 			.calc-item-count .item-11 {
-				width:0;
-				opacity:0;
 				animation-name: kf_calc_count_show;
 			}
 			@keyframes kf_calc_count_step_11 { 0% {} 60% { transform:translate(-17px, 0); } 100% { transform:translate(-17px, 0); }}
@@ -242,7 +252,7 @@
 					:style="{visibility:showNext?'visible':'hidden'}"> 下一步 <i class="fas fa-angle-double-right"></i> </button>
 			</div>
 			<transition name="c-fade">
-				<div class="c-step" v-show="currentStep>6">
+				<div class="c-step" v-show="currentStep>7">
 					<h3>等差数列，可以求出公差、已知末项和首项，求项数</h3>
 					<div>
 						<li>首先求出公差。这就像是知道了楼梯中每个台阶的高度。</li>
@@ -251,12 +261,12 @@
 						<li>别忘了加上起点台阶。好比，计算台阶的总数时，第一个台阶也要算进去。</li>
 					</div>
 					<transition name="c-fade">
-						<div class="c-inline-row" v-show="currentStep>7">
+						<div class="c-inline-row" v-show="currentStep>9">
 							<span class="c-big">项数 = 总差 &divide; 公差 + 1</span>
 						</div>
 					</transition>
 					<div style="margin-top:2em;">
-						<div class="number-series color1" :class="{'calc-item-count':currentStep>6}">
+						<div class="number-series color1 number-series-count" :class="{'calc-item-count':currentStep>8}">
 							<div v-for="n in 12" class="item" :class="'item-'+n" :style="{height:(n+2)+'em'}">
 								<div v-if="n==12">
 									<div v-for="n in 10" style="" class="other-step" :class="'other-step-'+(12-n)"></div>
@@ -276,12 +286,12 @@
 						<li>别忘了总差要加上起点项。好比，台阶的总高度差要加上起点台阶原本的高度，这样才是目标台阶的真实高度。</li>
 					</div>
 					<transition name="c-fade">
-						<div class="c-inline-row" v-show="currentStep>5">
+						<div class="c-inline-row" v-show="currentStep>6">
 							<span class="c-big">? = 起点 + 公差 &times; 项数差</span>
 						</div>
 					</transition>
 					<div style="margin-top:2em;">
-						<div class="number-series color1 nostep" :class="{'calc-item':currentStep>4}">
+						<div class="number-series color1 nostep" :class="{'calc-item':currentStep>5}">
 							<div v-for="n in 12" class="item" :class="{'item-start':n==3}" :style="{'border-color':n==3?'#0bef0b':'#ccc',height:(n+2)+'em', 'background-color':n>3&&n<12?'white':'#678bcd'}">
 								<div v-if="n==3" class="top-text " style="margin-left:-2em;color:#0baf0b">起点</div>
 								<div v-if="n==12" class="top-text">?</div>
@@ -333,16 +343,16 @@
 				mixins : [V_MIXIN],
 				el: '#app',
 				data: {
-					maxSteps : 8 , 
+					maxSteps : 10 , 
 					stepFreezeTime : {
 						step3 : {
 							next:5000
 						},
-						step5 : {
-							next:2500
+						step6 : {
+							next:1500
 						},
-						step7 : {
-							next:2500
+						step9 : {
+							next:2000
 						}
 					}
 				},
