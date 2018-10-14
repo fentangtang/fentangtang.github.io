@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<title>关于除法.商与除数</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../lib/fontawesome-all.css">
+		<link rel="stylesheet" href="../../lib/common.css">
+		<script src="../../lib/vue.js"></script>
+		<script src="../../lib/common.js" charset="utf-8"></script>
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<svg id="svg-root" width="100%" height="90vh" style="margin:0 auto;box-shadow:1px 1px 1px 1px #00000080" viewBox="-70,-50,1050,1100"
+				@mousemove="selectDivideBy($event)" @touchmove="selectDivideBy($event)" @mousedown="selectDivideBy($event)" @touchstart="selectDivideBy($event)">
+				<line :stroke="colorX" stroke-width="1" fill="none"
+				   :x1="posX(-20)" :y1="posY(0)" :x2="posX(1000)" :y2="posY(0)" />
+				<line :stroke="colorY" stroke-width="1" fill="none"
+				   :x1="posX(0)" :y1="posY(-20)" :x2="posX(0)" :y2="posY(950)" />
+				<text :x="posX(-70)" :y="posY(930)"  style="font-size:40px;" :fill="colorY">商</text>
+				<text :x="posX(1010)" :y="posY(-30)"  style="font-size:40px;" :fill="colorX">除数</text>
+				<text :x="posX(-50)" :y="posY(-50)"  style="font-size:40px;" fill="#000000">0</text>
+
+				<text :x="coordTextX" :y="coordTextY" style="font-size:40px;" fill="#000000">1 &divide; {{divideBy|amount}} = {{result|amount}}</text>
+
+				<g v-for="(coord,ind) in axisPoints" :key="coord">
+					<line :stroke="colorX" stroke-width="1" fill="none" :x1="posX(coord)" :y1="posY(0)" :x2="posX(coord)" :y2="posY(4)" />
+					<line :stroke="colorY" stroke-width="1" fill="none" :x1="posX(0)" :y1="posY(coord)" :x2="posX(4)" :y2="posY(coord)" />
+					<text :x="posX(coord-8)" :y="posY(-30)" style="font-size:30px;" :fill="colorX">{{ind+1}}</text>
+					<text :y="posY(coord-8)" :x="posX(-30)" style="font-size:30px;" :fill="colorY">{{ind+1}}</text>
+				</g>
+
+				<circle :cx="movingPoint.x" :cy="movingPoint.y" r="8" fill="red"/>
+				<line :stroke="colorX1"  stroke-width="1" fill="none"
+				   :x1="movingPoint.x" :y1="movingPoint.y" :x2="movingPoint.x" :y2="posY(0)" />
+				<line :stroke="colorY1"  stroke-width="1" fill="none"
+				   :x1="movingPoint.x" :y1="movingPoint.y" :x2="posX(0)" :y2="movingPoint.y" />
+			</svg>
+		</div>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				filters : {
+					amount (value) {
+						return typeof (value) === 'string' ? value : Math.round(value * 10000)/10000;
+					}
+				},
+				mounted () {
+					this.svgRoot = document.getElementById('svg-root'); 
+					this.svgPt = this.svgRoot.createSVGPoint();
+				},
+				data: {
+					colorY : '#009700',
+					colorX : '#0000a2',
+					colorY1 : '#60e760',
+					colorX1 : '#6060e2',
+					axisPoints : [100,200,300,400,500,600,700,800,900],
+					originPoint : {
+						x:0,y:950
+					},
+					divideBy : 1,
+					result : 1,
+					movingPoint : {
+						x:0,
+						y:0
+					}, 
+					svgPt : null,
+					svgRoot : null
+				}, 
+				computed : {
+					coordTextX () {
+						return this.movingPoint.x > 860 ? 860 : this.movingPoint.x + 20;
+					},
+					coordTextY () {
+						return this.movingPoint.y < 40 ? 40 : (this.divideBy == 0 ? 0 : this.movingPoint.y - 20);
+					}
+				},
+				methods : {
+					posX (coordinatePoint) {
+						return typeof(coordinatePoint)==='object' ? this.originPoint.x+coordinatePoint.x : this.originPoint.x+coordinatePoint;
+					},
+					posY (coordinatePoint) {
+						return typeof(coordinatePoint)==='object' ? this.originPoint.y-coordinatePoint.y : this.originPoint.y-coordinatePoint;
+					},
+					selectDivideBy (evt) {
+						this.svgPt.x = evt.clientX;
+						this.svgPt.y = evt.clientY; 
+
+						this.movingPoint = this.svgPt.matrixTransform(this.svgRoot.getScreenCTM().inverse());
+						this.movingPoint.x = this.movingPoint.x < 0 ? 0 : this.movingPoint.x; 
+						
+						this.divideBy = (this.movingPoint.x - this.originPoint.x) / 100;
+						this.result = this.divideBy == 0 ? '无穷大' : 1 / this.divideBy;
+
+						this.movingPoint.y = this.divideBy == 0 ? 2000 : this.posY(this.result*100);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
